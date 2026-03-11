@@ -51,7 +51,7 @@ def fetch_thread_messages(channel, thread_ts):
     return messages
 
 
-def add_reaction(channel, timestamp, emoji="eyes"):
+def add_reaction(channel, timestamp, emoji="memo"):
     """Add an emoji reaction to a message."""
     try:
         app.client.reactions_add(channel=channel, timestamp=timestamp, name=emoji)
@@ -59,7 +59,7 @@ def add_reaction(channel, timestamp, emoji="eyes"):
         pass  # best-effort
 
 
-def remove_reaction(channel, timestamp, emoji="eyes"):
+def remove_reaction(channel, timestamp, emoji="memo"):
     """Remove an emoji reaction from a message."""
     try:
         app.client.reactions_remove(channel=channel, timestamp=timestamp, name=emoji)
