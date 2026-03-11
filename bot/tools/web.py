@@ -1,7 +1,7 @@
 """Web tools - search and fetch URLs."""
 
 import httpx
-from duckduckgo_search import DDGS
+from ddgs import DDGS
 
 DEFINITIONS = [
     {
