@@ -2,7 +2,7 @@ import json
 
 from bot.app import llm
 from bot.config import MODEL, SYSTEM_PROMPT
-from bot.logging import get_thread_logger
+from bot.logger import get_thread_logger
 from bot.tools import TOOL_DEFINITIONS, execute_tool
 
 MAX_ITERATIONS = 10

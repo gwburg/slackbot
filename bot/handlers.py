@@ -1,3 +1,5 @@
+import traceback
+
 from bot.app import app
 from bot.llm import run_agent
 from bot.slack_utils import add_reaction, fetch_thread_messages, get_bot_user_id, remove_reaction
@@ -17,6 +19,8 @@ def handle_mention(event, say):
         try:
             messages = fetch_thread_messages(channel, thread_ts)
             run_agent(messages, {"channel": channel, "thread_ts": thread_ts})
+        except Exception:
+            traceback.print_exc()
         finally:
             remove_reaction(channel, ts)
 
@@ -42,5 +46,7 @@ def handle_message(event, say):
         try:
             messages = fetch_thread_messages(channel, thread_ts)
             run_agent(messages, {"channel": channel, "thread_ts": thread_ts})
+        except Exception:
+            traceback.print_exc()
         finally:
             remove_reaction(channel, ts)
