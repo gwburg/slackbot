@@ -2,7 +2,7 @@ import json
 import threading
 from pathlib import Path
 
-MEMORY_DIR = Path(__file__).parents[1] / ".memory"
+MEMORY_DIR = Path.home() / ".local" / "share" / "slackbot" / "memory"
 MEMORY_DIR.mkdir(exist_ok=True)
 ACTIVE_THREADS_FILE = MEMORY_DIR / "active_threads.json"
 
