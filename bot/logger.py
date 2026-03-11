@@ -2,7 +2,7 @@ import logging
 import sys
 from pathlib import Path
 
-LOG_DIR = Path(__file__).parents[1] / ".logs"
+LOG_DIR = Path.home() / ".local" / "share" / "slackbot" / "logs"
 LOG_DIR.mkdir(exist_ok=True)
 
 _loggers: dict[str, logging.Logger] = {}
