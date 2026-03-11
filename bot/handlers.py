@@ -1,5 +1,5 @@
 from bot.app import app
-from bot.llm import get_response, should_respond
+from bot.llm import run_agent
 from bot.slack_utils import fetch_thread_messages, get_bot_user_id
 from bot.threads import get_thread_lock, is_active_thread, track_thread
 
@@ -13,7 +13,7 @@ def handle_mention(event, say):
     lock = get_thread_lock(thread_ts)
     with lock:
         messages = fetch_thread_messages(channel, thread_ts)
-        get_response(messages, channel, thread_ts)
+        run_agent(messages, {"channel": channel, "thread_ts": thread_ts})
 
 
 @app.event("message")
@@ -31,13 +31,6 @@ def handle_message(event, say):
     channel = event["channel"]
     lock = get_thread_lock(thread_ts)
 
-    # Block until any in-progress response finishes, then process with full context
     with lock:
         messages = fetch_thread_messages(channel, thread_ts)
-        do_respond, decision = should_respond(messages)
-        print(f"[DEBUG] Thread {thread_ts} respond decision: {decision}")
-
-        if not do_respond:
-            return
-
-        get_response(messages, channel, thread_ts)
+        run_agent(messages, {"channel": channel, "thread_ts": thread_ts})
