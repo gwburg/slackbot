@@ -1,6 +1,7 @@
 """Web tools - search and fetch URLs."""
 
 import httpx
+import trafilatura
 from ddgs import DDGS
 
 DEFINITIONS = [
@@ -71,7 +72,7 @@ def _fetch_url(url):
         with httpx.Client(follow_redirects=True, timeout=15) as client:
             response = client.get(url, headers={"User-Agent": "Mozilla/5.0"})
             response.raise_for_status()
-            text = response.text
+            text = trafilatura.extract(response.text) or response.text
             if len(text) > 10000:
                 text = text[:10000] + "\n... (truncated)"
             return text
