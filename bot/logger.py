@@ -1,4 +1,5 @@
 import logging
+from datetime import UTC, datetime
 from pathlib import Path
 
 LOG_DIR = Path.home() / ".local" / "share" / "slackbot" / "logs"
@@ -18,8 +19,8 @@ def get_thread_logger(thread_ts: str) -> logging.Logger:
 
     formatter = logging.Formatter("%(asctime)s %(message)s", datefmt="%Y-%m-%d %H:%M:%S")
 
-    # File handler — one file per thread
-    fh = logging.FileHandler(LOG_DIR / f"{thread_ts}.log")
+    dt = datetime.fromtimestamp(float(thread_ts), tz=UTC).strftime("%Y-%m-%d_%H-%M-%S")
+    fh = logging.FileHandler(LOG_DIR / f"{dt}.log")
     fh.setFormatter(formatter)
     logger.addHandler(fh)
 
