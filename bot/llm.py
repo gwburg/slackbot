@@ -1,5 +1,3 @@
-import json
-
 from bot.app import llm
 from bot.config import MODEL, SYSTEM_PROMPT
 from bot.logger import get_thread_logger
