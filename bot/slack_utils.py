@@ -51,6 +51,22 @@ def fetch_thread_messages(channel, thread_ts):
     return messages
 
 
+def add_reaction(channel, timestamp, emoji="eyes"):
+    """Add an emoji reaction to a message."""
+    try:
+        app.client.reactions_add(channel=channel, timestamp=timestamp, name=emoji)
+    except Exception:
+        pass  # best-effort
+
+
+def remove_reaction(channel, timestamp, emoji="eyes"):
+    """Remove an emoji reaction from a message."""
+    try:
+        app.client.reactions_remove(channel=channel, timestamp=timestamp, name=emoji)
+    except Exception:
+        pass  # best-effort
+
+
 def send_message(channel, text, thread_ts=None):
     """Send a message to a Slack channel or thread. Single path for all outgoing messages."""
     app.client.chat_postMessage(channel=channel, text=text, thread_ts=thread_ts)
