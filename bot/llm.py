@@ -55,7 +55,7 @@ def run_agent(messages, context):
         text = choice.message.content or ""
 
         if choice.finish_reason == "tool_calls":
-            chat_messages.append(choice.message)
+            chat_messages.append(choice.message.model_dump(exclude_none=True))
             for tool_call in choice.message.tool_calls:
                 result = execute_tool(
                     tool_call.function.name,

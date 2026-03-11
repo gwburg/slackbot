@@ -31,7 +31,10 @@ def format_timestamp(ts):
 
 def fetch_thread_messages(channel, thread_ts):
     """Fetch all messages in a thread and convert to chat format."""
-    result = app.client.conversations_replies(channel=channel, ts=thread_ts)
+    try:
+        result = app.client.conversations_replies(channel=channel, ts=thread_ts)
+    except Exception:
+        return []
     messages = []
     uid = get_bot_user_id()
     for msg in result["messages"]:
