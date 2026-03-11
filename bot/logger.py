@@ -1,5 +1,4 @@
 import logging
-import sys
 from pathlib import Path
 
 LOG_DIR = Path.home() / ".local" / "share" / "slackbot" / "logs"
@@ -23,11 +22,6 @@ def get_thread_logger(thread_ts: str) -> logging.Logger:
     fh = logging.FileHandler(LOG_DIR / f"{thread_ts}.log")
     fh.setFormatter(formatter)
     logger.addHandler(fh)
-
-    # Stdout handler — use stdout to separate from slack_bolt's stderr logging
-    sh = logging.StreamHandler(sys.stdout)
-    sh.setFormatter(formatter)
-    logger.addHandler(sh)
 
     _loggers[thread_ts] = logger
     return logger
