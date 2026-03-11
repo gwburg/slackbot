@@ -11,5 +11,5 @@ dependencies = [
     "openai>=2.26.0",
 ]
 
-[project.optional-dependencies]
+[dependency-groups]
 dev = ["watchfiles"]

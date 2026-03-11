@@ -297,7 +297,7 @@ dependencies = [
     { name = "slack-cli-hooks" },
 ]
 
-[package.optional-dependencies]
+[package.dev-dependencies]
 dev = [
     { name = "watchfiles" },
 ]
@@ -308,9 +308,10 @@ requires-dist = [
     { name = "python-dotenv" },
     { name = "slack-bolt" },
     { name = "slack-cli-hooks", specifier = "<1.0.0" },
-    { name = "watchfiles", marker = "extra == 'dev'" },
 ]
-provides-extras = ["dev"]
+
+[package.metadata.requires-dev]
+dev = [{ name = "watchfiles" }]
 
 [[package]]
 name = "sniffio"
